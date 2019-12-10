@@ -3,7 +3,7 @@ import TotoList from './TotoList'
 
 function App() {
  
-  const [todos, setTodos]= useState(['Todo1', 'Todo2']);
+  const [todos, setTodos]= useState([{id:1, name: "Crossfit", complete:false}]);
   return (
     <>
        <TotoList todos ={todos}/>

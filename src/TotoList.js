@@ -5,7 +5,7 @@ export default function TotoList({todos}) {
     return (
 
     todos.map(todo => { 
-        return <Todo key={todo} todo={todo} />
+        return <Todo key={todo.id} todo={todo} />
         })
     )
 }

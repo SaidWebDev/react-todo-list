@@ -1,6 +1,7 @@
 import React ,{useState, useRef, useEffect} from 'react';
 import TotoList from './TotoList'
 import uuidv4 from 'uuid/v4'
+import { func } from 'prop-types';
 
 const LOCAL_STORAGE_KEY= 'todoApp.todos'
 
@@ -20,6 +21,14 @@ setTodos(storedTodos)
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos))
   }, [todos]) 
 
+
+function toggleTodo(id) {
+  const newTodos =[ ...todos]
+  const todo = newTodos.find( todo => todo.id === id)
+  todo.complete = !todo.complete
+  setTodos(newTodos)
+}
+  
   function handleAddTodo(e){
     const name =todoNameRef.current.value
 
@@ -33,11 +42,11 @@ setTodos(storedTodos)
 
   return (
     <>
-       <TotoList todos ={todos}/>
+       <TotoList todos ={todos} toggleTodo={toggleTodo}/>
        <input ref={todoNameRef} type="text"/> 
        <button onClick={handleAddTodo}> Add Todo</button>
        <button>Clear Completed</button>
-       <div>0 left to do</div>
+       <div> {todos.filter(todo => !todo.complete).length} left to do</div>
     </>
   )
 }
